@@ -44,7 +44,7 @@ versions. This probably only works in GNU/Linux.
 #+END_EXAMPLE
 
 I use this with the s2disk suspend command. I recommend adding the
-following to a new file in \/etc/sudoers.d/ (and chmod 440), to make it
+following to a new file in //etc/sudoers.d/ (and chmod 440), to make it
 executable without sudo password input:
 
 #+BEGIN_EXAMPLE
