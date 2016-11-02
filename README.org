@@ -1,0 +1,76 @@
+#+TITLE:     autosleep
+#+AUTHOR:    Per Weijnitz
+#+EMAIL:     per.weijnitz@gmail.com
+#+DATE:      2016-11-02
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:nil pri:nil tags:not-in-toc
+#+EXPORT_EXCLUDE_TAGS: exclude
+#+STARTUP:    showall
+
+ | Status:   | Under Development                   |
+ | Location: | [[https://github.com/perweij/autosleep]] |
+ | Version:  | 0.1                                 |
+
+* Description
+
+A program that will execute a command after the user has been idle
+past a given time limit. The main purpose is to execute an OS suspend
+command.  
+
+User activity is picked up from X11 and include mouse movement and keyboard
+activity. It does not depend on XScreenSaver.
+
+Bigger desktop session packages provide this functionality,
+but for minimal setups with only X11 and dwm, I haven't found anything
+similar. A design goal is not to depend on runtimes that pull in loads
+of dependencies, and just be a simple C program.
+
+I have only tried this on my two laptops, running Debian Jessie
+GNU/Linux x86_64 - I have no idea if it needs tweaking for other OS
+versions. This probably only works in GNU/Linux.
+
+
+* Usage
+#+BEGIN_EXAMPLE
+ autosleep timeout_seconds keyboard_input_nr suspend_cmd...
+
+ - timeout_seconds   - the number of seconds that defines inactivity
+ - keyboard_input_nr - your keyboard id number (check with xinput -list)
+ - suspend_cmd...    - the suspend command and arguments
+#+END_EXAMPLE
+
+I use this with the s2disk suspend command. I recommend adding the
+following to a new file in /etc/sudoers.d/ (and chmod 440), to make it
+executable without sudo password input:
+
+  yourusername ALL=(ALL) NOPASSWD: /usr/sbin/s2disk
+
+
+* Todo
+ - pick up mouse button clicks.
+ - detect keyboard_input_nr automatically
+ - tidy up the code. Right now it is a very quick and sloppy hack.
+ - add acknowledgements to some stackoverflow pages
+ - fix the makefile
+
+* Acknowledgements
+ - Some code is borrowed from xinput (https://anonscm.debian.org/cgit/pkg-xorg/app/xinput.git).
+
+
+* History
+
+** 2016-11-02: Version 0.1
+A rough first version.
+
+
+
+
+
+
+
+
+
+
