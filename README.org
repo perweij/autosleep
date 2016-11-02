@@ -18,7 +18,8 @@
 
 A program that will execute a command after the user has been idle
 past a given time limit. The main purpose is to execute an OS suspend
-command.  
+command. The program continues after each suspend cycle, making it
+suitable to start once in your ~/.xinitrc.
 
 User activity is picked up from X11 and include mouse movement and keyboard
 activity. In contrast to other techniques, it does not depend on XScreenSaver.
