@@ -12,7 +12,6 @@
 
  | Status:   | Works                                |
  | Location: | [[https://github.com/perweij/autosleep]] |
- | Version:  | 0.1                                  |
 
 
 * Description
