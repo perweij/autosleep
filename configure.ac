@@ -1,4 +1,4 @@
-AC_INIT([autosleep], [0.1], [per.weijnitz@gmail.com])
+AC_INIT([autosleep], [0.3], [per.weijnitz@gmail.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AC_CONFIG_HEADERS([config.h])
