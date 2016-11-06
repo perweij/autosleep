@@ -1,7 +1,7 @@
 #+TITLE:     autosleep
 #+AUTHOR:    Per Weijnitz
 #+EMAIL:     per.weijnitz@gmail.com
-#+DATE:      2016-11-02
+#+DATE:      2016-11-06
 #+DESCRIPTION: 
 #+KEYWORDS: 
 #+LANGUAGE:  en
@@ -10,60 +10,73 @@
 #+EXPORT_EXCLUDE_TAGS: exclude
 #+STARTUP:    showall
 
- | Status:   | Under Development                   |
+ | Status:   | Works                                |
  | Location: | [[https://github.com/perweij/autosleep]] |
- | Version:  | 0.1                                 |
+ | Version:  | 0.1                                  |
+
 
 * Description
 
-A program that will execute a command after the user has been idle
-past a given time limit. The main purpose is to execute an OS suspend
-command. The program continues after each suspend cycle, making it
-suitable to start once in your =~/.xinitrc=.
+This is a program that will execute a command after the user has been
+idle past a given time limit. The main purpose is to execute an OS
+suspend command, although any command can be supplied. Autosleep
+continues after each suspend cycle, making it suitable for starting
+just once in your =~/.xinitrc=.
 
 User activity is picked up from X11 and include mouse movement and keyboard
 activity. In contrast to other techniques, it does not depend on XScreenSaver.
 
-Bigger desktop session packages provide this functionality,
-but for minimal setups with only X11 and dwm, I haven't found anything
-similar. A design goal is not to depend on runtimes that pull in loads
-of dependencies, and just be a simple C program.
+Bigger desktop session packages provide this functionality, but for
+minimal setups with only X11 and dwm/evilwm/..., I haven't found
+anything similar. A design goal is not to depend on runtimes that pull
+in loads of dependencies, and just be a simple C program.
 
-I have only tried this on my two laptops, running Debian Jessie
-GNU/Linux x86_64 - I have no idea if it needs tweaking for other OS
+I have only tried this on my laptops, running GNU/Linux Debian Jessie
+x86_64 and i686 - I have no idea if it needs tweaking for other OS
 versions. This probably only works in GNU/Linux.
 
 
 * Usage
+
 #+BEGIN_EXAMPLE
  autosleep timeout_seconds keyboard_input_nr suspend_cmd...
 
  - timeout_seconds   - the number of seconds that defines inactivity
  - keyboard_input_nr - your keyboard id number (check with xinput -list)
- - suspend_cmd...    - the suspend command and arguments
+ - suspend_cmd...    - the suspend command and arguments. Full path required, including to sudo.
 #+END_EXAMPLE
 
-I use this with the s2disk suspend command. I recommend adding the
+I use this with the s2ram suspend command. I recommend adding the
 following to a new file in =/etc/sudoers.d/= (and chmod 440), to make it
 executable without sudo password input:
 
-: yourusername ALL=(ALL) NOPASSWD: /usr/sbin/s2disk
+: yourusername ALL=(ALL) NOPASSWD: /usr/sbin/s2ram
+
+** Examples
+Suspend the computer after one hour of inactivity on keyboard ID 9:
+: autosleep 3600 9 /usr/bin/sudo /usr/sbin/s2ram
+
+
+* Install
+ - =autoreconf --install=
+ - =./configure (--prefix...)=
+ - =make all (install)=
 
 
 * Todo
- - pick up mouse button clicks.
- - detect keyboard_input_nr automatically
- - tidy up the code. Right now it is a very quick and sloppy hack.
- - add acknowledgements to some stackoverflow pages
- - fix the makefile
+Right now it monitors the keyboard and the mouse movements. Monitoring
+mouse clicks as well would be a natural continuation.
+
 
 * Acknowledgements
- - Some code is borrowed from xinput (https://anonscm.debian.org/cgit/pkg-xorg/app/xinput.git).
+For reading the mouse position, I found this useful: https://ubuntuforums.org/showthread.php?t=562087 (user: cwcentral).
+
+For setting up event listening in X11, I found this usefil:  https://anonscm.debian.org/cgit/pkg-xorg/app/xinput.git/tree/src/test.c (Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>).
 
 
 * History
 
-** 2016-11-02: Version 0.1
+** 2016-11-06: Version 0.1
 A rough first version.
 
 
