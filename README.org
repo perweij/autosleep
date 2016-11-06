@@ -70,7 +70,7 @@ mouse clicks as well would be a natural continuation.
 * Acknowledgements
 For reading the mouse position, I found this useful: https://ubuntuforums.org/showthread.php?t=562087 (user: cwcentral).
 
-For setting up event listening in X11, I found this usefil:  https://anonscm.debian.org/cgit/pkg-xorg/app/xinput.git/tree/src/test.c (Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>).
+For setting up event listening in X11, I found this useful:  https://anonscm.debian.org/cgit/pkg-xorg/app/xinput.git/tree/src/test.c (Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>).
 
 
 * History
